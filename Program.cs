@@ -220,3 +220,41 @@ namespace ipg203
             Console.WriteLine($"  {Name} is learning and assisting in the {Department} department.");
         }
     }
+    // ============================================================
+    // 4. Department class - shows Polymorphism with List
+    // ============================================================
+    public class Department
+    {
+        private List<Employee> _employees;
+        public string DepartmentName { get; private set; }
+
+        public Department(string name)
+        {
+            DepartmentName = name;
+            _employees = new List<Employee>();
+        }
+
+        public void AddEmployee(Employee emp)
+        {
+            _employees.Add(emp);
+        }
+
+        // Returns the internal list for external use (e.g., budget calculation)
+        public List<Employee> GetEmployees()
+        {
+            return _employees;
+        }
+
+        // Polymorphism: same method behaves differently for each employee
+        public void ShowAllEmployees()
+        {
+            Console.WriteLine($"\n========== Department: {DepartmentName} ==========");
+            foreach (var emp in _employees)
+            {
+                emp.Work();
+                emp.DisplayInfo();
+                emp.CheckSalary(); // FIX: no longer adds to budget here
+                Console.WriteLine("  ----------------------------");
+            }
+        }
+    }
